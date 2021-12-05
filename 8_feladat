@@ -21,9 +21,9 @@ results <- data.frame(cbind(prices,payoffLongCall,payoffLongPut,payoff))
 ggplot(results, aes(x=S)) + 
   geom_line(aes(y = payoffLongCall, color = "LongCall")) + 
   geom_line(aes(y = payoffLongPut, color="LongPut"))+
-  geom_line(aes(y = payoff, color = 'Payoff')) +
+  geom_line(aes(y = payoff, color = 'Payoff',size=1.5)) +
   geom_vline(aes(xintercept = St, color = 'Price at T')) +
   scale_colour_manual("", 
                       breaks = c("LongCall", "LongPut", "Payoff", 'Price at T'),
                       values = c("darkred", "darkblue", "darkgreen", "orange")) + ylab("Payoff")+
-  ggtitle("Long Straddle Payoff")  
+  ggtitle("Széles terpesz stratégia")  
