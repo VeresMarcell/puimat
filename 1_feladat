@@ -1,0 +1,21 @@
+library(derivmkts)
+
+s=5000; k=5100; v=log(1.06)/sqrt(3/12); r=0.05; tt=3/12; d=0; nstep=2
+
+x <- binomopt(s, k, v, r, tt, d, nstep,specifyupdn=TRUE,up=1.06, dn=0.95, american=FALSE, putopt=FALSE, returntrees=TRUE)
+
+y <- binomopt(s, k, v, r, tt, d, nstep, specifyupdn=TRUE,up=1.06, dn=0.95,american=FALSE, putopt=TRUE,
+         returnparams=TRUE,returntrees=TRUE )
+
+paste("A call opció igazságos ára:", x$oppricetree[1,1])
+paste("A put opció igazságos ára:", y$oppricetree[1,1])
+c <- x$oppricetree[1,1]+k*exp(-r*tt)
+p <- y$oppricetree[1,1]+s
+print(c)
+print(p)
+
+if (all.equal(c,p)==TRUE){
+  print("put-call paritás teljesül")
+} else {
+  print("put call paritás nem teljesül, arbitrázsra van lehetőség")
+}

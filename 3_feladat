@@ -1,0 +1,15 @@
+library(derivmkts)
+
+s=100; k=110; v=log(1.1)/sqrt(1/12); r=0.1; r2=0.12; tt=1/12; d=0; nstep=1
+
+fu <- binomopt(s*1.1, k, v, r2, tt, d, nstep,specifyupdn=TRUE,up=1.1, dn=0.8, american=TRUE, putopt=FALSE, returntrees=TRUE)
+
+fd <- binomopt(s*0.8, k, v, r2, tt, d, nstep, specifyupdn=TRUE,up=1.1, dn=0.8,american=TRUE, putopt=FALSE,
+         returnparams=TRUE,returntrees=TRUE )
+p <- (exp(r*tt)-0.8)/(1.1-0.8)
+f <- (exp(-r*tt)*(fu$price*p+fd$price*(1-p)))
+
+paste("Az usa call opció igazságos ára:",f)
+
+
+

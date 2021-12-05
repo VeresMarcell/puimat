@@ -1,0 +1,8 @@
+library(derivmkts)
+
+s=4000; k=4000; v=log(1.1)/sqrt(1/4); r=0.12; tt=1/4; d=0; nstep=2
+
+x <- binomopt(s, k, v, r, tt, d, nstep,specifyupdn=TRUE,up=1.1, dn=0.9, american=TRUE, putopt=TRUE, returntrees=TRUE)
+
+print(x)
+paste("Az usa put opció igazságos ára:",x$price)
