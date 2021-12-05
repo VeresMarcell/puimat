@@ -1,6 +1,6 @@
 
 library(ggplot2)
-S <- seq(2500,4000,1) # Vector of prices
+S <- seq(2750,3750,1) # Vector of prices
 K1 <- 3400
 K2 <- 3300
 St <- 3000
