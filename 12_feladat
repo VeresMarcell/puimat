@@ -1,0 +1,23 @@
+BlackScholes <- function(S, K, r, T, sig, type){
+  
+  if(type=="C"){
+    d1 <- (log(S/K) + (r + sig^2/2)*T) / (sig*sqrt(T))
+    d2 <- d1 - sig*sqrt(T)
+    
+    value <- S*pnorm(d1) - K*exp(-r*T)*pnorm(d2)
+    return(value)}
+  
+  if(type=="P"){
+    d1 <- (log(S/K) + (r + sig^2/2)*T) / (sig*sqrt(T))
+    d2 <- d1 - sig*sqrt(T)
+    
+    value <-  (K*exp(-r*T)*pnorm(-d2) - S*pnorm(-d1))
+    return(value)}
+}
+
+S=69; K=70; v=0.35; r=0.05; tt=0.5; d=0
+
+put <- BlackScholes(S,K,r,tt,v,"P")
+
+paste("Az eu put opció igazságos ára:",put)
+greeks(bsput(S,K,v,r,tt,d))
