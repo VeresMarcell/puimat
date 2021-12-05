@@ -12,4 +12,8 @@ c <- x$oppricetree[1,1]+k*exp(-r*tt)
 p <- y$oppricetree[1,1]+s
 print(c)
 print(p)
-
+if (all.equal(c,p)==TRUE){
+  print("put-call paritás teljesül")
+} else {
+  print("put call paritás nem teljesül, arbitrázsra van lehetőség")
+}
