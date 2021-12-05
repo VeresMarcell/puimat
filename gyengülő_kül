@@ -1,4 +1,5 @@
 
+
 library(ggplot2)
 S <- seq(2500,4000,1) # Vector of prices
 K1 <- 3400
@@ -22,7 +23,7 @@ payoffLongCall_2 <- pmax(0,S - K2)
 payoff <- rowSums(cbind(payoffLongCall,(-1)*payoffLongCall_2))
 
 # Make a DataFrame with all the variable to plot it with ggplot
-results <- data.frame(cbind(S,payoffLongCall,payoffLongPut,payoff))
+results <- data.frame(cbind(S,payoffLongCall,payoffLongCall_2,payoff))
 
 ggplot(results, aes(x=S)) + 
   geom_line(aes(y = payoffLongCall, color = "LongCall")) + 
