@@ -6,12 +6,14 @@ x <- binomopt(s, k, v, r, tt, d, nstep,specifyupdn=TRUE,up=1.06, dn=0.95, americ
 
 y <- binomopt(s, k, v, r, tt, d, nstep, specifyupdn=TRUE,up=1.06, dn=0.95,american=FALSE, putopt=TRUE,
          returnparams=TRUE,returntrees=TRUE )
-print(x)
-print(y)
+
+paste("A call opció igazságos ára:", x$oppricetree[1,1])
+paste("A put opció igazságos ára:", y$oppricetree[1,1])
 c <- x$oppricetree[1,1]+k*exp(-r*tt)
 p <- y$oppricetree[1,1]+s
 print(c)
 print(p)
+
 if (all.equal(c,p)==TRUE){
   print("put-call paritás teljesül")
 } else {
