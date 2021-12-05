@@ -1,0 +1,32 @@
+
+library(ggplot2)
+S <- seq(1400,2000,1) # Vector of prices
+K1 <- 1600
+K2 <- 1650
+K3 <- 1700
+St <- 1550
+
+# call option payoff at expiration 
+payoffLongCall <- pmax(0,S - K1)
+payoffLongCall_2 <- pmax(0,S - K3)
+payoffShortCall <- (-1)*pmax(0,S - K2)
+
+
+# The payoff of the Strategy is the sum of the call and put payoff. Need
+# to sum wise element by element between the two vectors
+payoff <- rowSums(cbind(payoffLongCall,payoffLongCall_2,2*payoffShortCall))
+
+# Make a DataFrame with all the variable to plot it with ggplot
+results <- data.frame(cbind(prices,payoffLongCall,payoffLongCall_2,payoffShortCall,payoff))
+
+ggplot(results, aes(x=S)) + 
+  geom_line(aes(y = payoffLongCall, color = "LongCall")) + 
+  geom_line(aes(y = payoffLongCall_2, color="LongCall_2"))+
+  geom_line(aes(y=payoffShortCall, color = 'ShortCall')) +
+  geom_line(aes(y = payoff, color = 'Payoff',size=1.5)) +
+  geom_line(aes(y=0, color = 'zeroline')) +
+  geom_vline(aes(xintercept = St, color = 'Price at T')) +
+  scale_colour_manual("", 
+                      breaks = c("LongCall", "LongCall_2","ShortCall", "Payoff","zeroline", 'Price at T'),
+                      values = c("red", "blue","yellow", "green","black", "orange")) + ylab("Payoff")+
+  ggtitle("Pillangó stratégia call opcióval")  
