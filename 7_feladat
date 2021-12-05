@@ -2,8 +2,6 @@
 library(ggplot2)
 S <- seq(2000,4500,1) # Vector of prices
 K <- 3400 # strike price for both put and call  (K - kötési ár)
-p_call <- 20 # option price call (c - call opció ára)
-p_put <- 10  # option price put (p - put opció ára)
 St <- 3550
 
 # call option payoff at expiration 
