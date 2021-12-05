@@ -1,0 +1,8 @@
+library(derivmkts)
+
+s=5000; k=5300; v=log(1.2)/sqrt(1/3); r=0.05; tt=1/3; d=0; nstep=2
+
+x <- binomopt(s, k, v, r, tt, d, nstep,specifyupdn=TRUE,up=1.2, dn=0.94, american=TRUE, putopt=FALSE, returntrees=TRUE)
+
+print(x)
+paste("Az usa call opció igazságos ára:",x$price)
