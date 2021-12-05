@@ -1,34 +1,32 @@
 
-
 library(ggplot2)
 S <- seq(7000,9000,1) # Vector of prices
 K1 <- 7800
 K2 <- 8100
+St <- 8800
 
-
-# call option payoff at expiration 
-
-#payoffLongCall <- pmax(0,S - K1)
-#payoffLongCall_2 <- pmax(0,S - K2)  
 
 # put option payoff at expiration
 
 payoffLongPut <- pmax(0,K1 - S)
-payoffLongPut_2 <- (-1)*pmax(0,K2 - S)
+payoffShortPut <- (-1)*pmax(0,K2 - S)
+
 
 # The payoff of the Strategy is the sum of the call and put payoff. Need
 # to sum wise element by element between the two vectors
-payoff <- rowSums(cbind(payoffLongPut,payoffLongPut_2))
+payoff <- rowSums(cbind(payoffLongPut,payoffShortPut))
 
 # Make a DataFrame with all the variable to plot it with ggplot
-results <- data.frame(cbind(S,payoffLongCall,payoffLongCall_2,payoff))
+results <- data.frame(cbind(S,payoffLongPut,payoffShortPut,payoff))
+
 
 ggplot(results, aes(x=S)) + 
   geom_line(aes(y = payoffLongPut, color = "LongPut")) + 
-  geom_line(aes(y = payoffLongPut_2, color="LongPut_2"))+
+  geom_line(aes(y = payoffShortPut, color="ShortPut"))+
   geom_line(aes(y=payoff, color = 'Payoff',size=1.5)) +
   geom_line(aes(y=0, color = "zero")) +
+  geom_vline(aes(xintercept = St, color = 'Price at T')) +
   scale_colour_manual("", 
-                      breaks = c("LongPut", "LongPut_2", "Payoff","zero"),
-                      values = c("red", "blue", "darkgreen","black")) + ylab("Payoff")+
+                      breaks = c("LongPut", "ShortPut", "Payoff","zero","Price at T"),
+                      values = c("red", "blue", "darkgreen","black","orange")) + ylab("Payoff")+
   ggtitle("Erősödő különbözeti stratégia put opcióval")  
