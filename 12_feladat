@@ -1,3 +1,5 @@
+library(derivmkts)
+
 BlackScholes <- function(S, K, r, T, sig, type){
   
   if(type=="C"){
