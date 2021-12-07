@@ -17,7 +17,7 @@ payoffShortCall <- (-1)*pmax(0,S - K2)
 payoff <- rowSums(cbind(payoffLongCall,payoffLongCall_2,2*payoffShortCall))
 
 # Make a DataFrame with all the variable to plot it with ggplot
-results <- data.frame(cbind(prices,payoffLongCall,payoffLongCall_2,payoffShortCall,payoff))
+results <- data.frame(cbind(S,payoffLongCall,payoffLongCall_2,payoffShortCall,payoff))
 
 ggplot(results, aes(x=S)) + 
   geom_line(aes(y = payoffLongCall, color = "LongCall")) + 
@@ -30,3 +30,5 @@ ggplot(results, aes(x=S)) +
                       breaks = c("LongCall", "LongCall_2","ShortCall", "Payoff","zeroline", 'Price at T'),
                       values = c("red", "blue","yellow", "green","black", "orange")) + ylab("Payoff")+
   ggtitle("Pillangó stratégia call opcióval")  
+x <- pmax(0,St-K1)+pmax(0,St-K3)-2*pmax(0,St-K2)
+paste("A kifizetés",St,"esetén:",x)
