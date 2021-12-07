@@ -16,4 +16,4 @@ BlackScholes <- function(S, K, r, T, sig, type){
 }
 call <- BlackScholes(4200,4000,0.1,0.5,0.2,"C")
 
-print(call)
+paste("A call opció igazságos ára",call)
