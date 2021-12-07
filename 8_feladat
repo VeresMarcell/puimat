@@ -16,7 +16,7 @@ payoffLongPut <- pmax(0,K2-S)
 payoff <- rowSums(cbind(payoffLongCall,payoffLongPut))
 
 # Make a DataFrame with all the variable to plot it with ggplot
-results <- data.frame(cbind(prices,payoffLongCall,payoffLongPut,payoff))
+results <- data.frame(cbind(S,payoffLongCall,payoffLongPut,payoff))
 
 ggplot(results, aes(x=S)) + 
   geom_line(aes(y = payoffLongCall, color = "LongCall")) + 
@@ -26,4 +26,7 @@ ggplot(results, aes(x=S)) +
   scale_colour_manual("", 
                       breaks = c("LongCall", "LongPut", "Payoff", 'Price at T'),
                       values = c("darkred", "darkblue", "darkgreen", "orange")) + ylab("Payoff")+
-  ggtitle("Széles terpesz stratégia")  
+  ggtitle("Széles terpesz stratégia")    
+x <- pmax(0,St-K1)+pmax(0,K2-St)
+paste("A Kifizetés", St,"esetén:",x)
+
