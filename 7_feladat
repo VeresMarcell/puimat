@@ -29,3 +29,5 @@ ggplot(results, aes(x=S)) +
                       breaks = c("LongCall", "LongPut", "Payoff","zeroline","Price at T"),
                       values = c("red", "blue", "green","black","orange")) + ylab("Payoff")+
   ggtitle("Bal terpesz stratégia")  
+x <- pmax(0,St-K)+2*pmax(0,K-St)
+paste("A Kifizetés", St,"esetén:",x)
