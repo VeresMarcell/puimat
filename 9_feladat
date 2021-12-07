@@ -1,4 +1,3 @@
-
 library(ggplot2)
 S <- seq(7000,9000,1) # Vector of prices
 K1 <- 7800
@@ -30,3 +29,6 @@ ggplot(results, aes(x=S)) +
                       breaks = c("LongPut", "ShortPut", "Payoff","zero","Price at T"),
                       values = c("red", "blue", "darkgreen","black","orange")) + ylab("Payoff")+
   ggtitle("Erősödő különbözeti stratégia put opcióval")  
+
+x <- pmax(0,K1-St)-pmax(0,K2-St)
+paste("A kifizetés",St, "esetén:",x)
